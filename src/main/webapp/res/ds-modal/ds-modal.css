@@ -1,0 +1,81 @@
+.dsm-layout {
+    z-index: 999;
+    position: fixed;
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.dsm-base {
+
+    display: table-cell;
+    vertical-align: middle; 
+    text-align: center;
+}
+
+.dsm-main {
+    text-align: left;
+    display: inline-block;
+    min-width: 300px;
+    min-height: 40px;
+    background-color: var(--background);
+    /*background: ${aa3};*/
+}
+
+.dsm-header {
+    padding: 4px;
+    background-color: #555;
+    background: linear-gradient(var(--tbl-head-gradient-from), var(--tbl-head-gradient-to));
+}
+
+.dsm-header-close{
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.dsm-header-close:hover {
+    color: var(--hover-font);
+}
+.dsm-middle {
+    display: flex;
+}
+
+.dsm-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.dsm-left > span {
+    font-size: 48px;
+    margin: 20px 10px 40px 20px;
+
+}
+
+.dsm-footer{
+    padding: 4px 8px;
+    background-color: #444;
+    background: linear-gradient(var(--tbl-footer-gradient-from), var(--tbl-footer-gradient-to));
+    display: flex;
+}
+
+.dsm-footer > span:nth-child(1) {
+
+}
+
+.dsm-footer > span:nth-child(1) {
+    flex: auto;
+}
+
+.dsm-footer button .fa {
+    margin-right: 8px;
+    font-size: 1.3em;
+    vertical-align: baseline;
+}
+
+.dsm-footer button {
+    padding: 6px 14px;
+    margin: 4px;
+}

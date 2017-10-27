@@ -1,0 +1,280 @@
+.dsTbl {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    cursor: default;
+    user-select: none;
+    /*fix dla firefox-a (nieprawidlowe obliczanie wysokosci)*/
+    min-height: 0px;
+    border: 1px solid red;
+
+    border-left-color: var(--groove-dark);
+    border-top-color: var(--groove-dark);
+    border-right-color: var(--groove-light);
+    border-bottom-color: var(--groove-light);
+    box-shadow: inset -1px -1px 0 0 var(--groove-dark), inset 1px 1px 0 0 var(--groove-light);
+    padding: 1px;
+}
+
+.dsTbl tr {
+    white-space: nowrap;
+    display: block;
+}
+
+
+
+.dsTbl tbody, 
+.dsTbl thead, 
+.dsTbl tfoot {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+/****************** tfoot ****************/
+
+.dsTbl thead,
+.dsTbl tfoot{
+    flex-shrink: 0; 
+}
+
+.dsTbl thead tr{
+    width: 100%;
+    display: inline-flex;
+}
+
+.dsTbl thead tr th>*{
+    width: 100%;
+}
+
+.dsTbl thead tr th{
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.dsTbl[data-full-height] tbody {
+    flex-grow: 1;
+}
+
+.dsTbl tbody {
+    overflow-y: auto; 
+    overflow-x: auto; 
+    border-top: none;
+    border-bottom: none;
+    background: var(--tbl-background);
+}
+
+.dsTbl tbody.auto {
+    overflow-x: auto; 
+}
+
+.dsTbl thead th {
+    background: linear-gradient(var(--tbl-head-gradient-from), var(--tbl-head-gradient-to));
+    color: var(--font);
+    font-size: 13px;
+    text-align: center;
+}
+
+.dsTbl thead th div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dsTbl thead .th-subtitle{
+    font-weight: normal;
+    font-size: 0.85em;
+    color: var(--font-gray);
+}
+
+.dsTbl tbody th {
+    text-align: center;
+}
+
+.dsTbl tfoot td {
+    display: inline-block;
+    padding: 5px;
+    width: 100%;
+    background: linear-gradient(var(--tbl-footer-gradient-from), var(--tbl-footer-gradient-to));
+    color: var(--font);
+    font-size: 13px;
+}
+
+.dsTbl tbody td,
+.dsTbl th{
+    margin: 0;
+    padding: 5px 8px;
+    border-top:     1px solid var(--tbl-td-line-color-light);
+    border-left:    1px solid var(--tbl-td-line-color-light);
+    border-right:   1px solid var(--tbl-td-line-color);
+    border-bottom:  1px solid var(--tbl-td-line-color);
+
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.dsTbl thead th {
+    /*    border-top: none;
+        border-bottom: none;*/
+}
+
+
+.dsTbl .th-scroll{
+    border: none;
+    width: auto;
+}
+
+.dsTbl .th-selectable{
+    width: 24px;
+    color: var(--font-gray);
+    text-align: center;
+}
+
+.dsTbl .th-sortable {
+    width: 20px;
+    color: var(--font-gray);
+    text-align: center;
+}
+
+.dsTbl tbody .th-sortable:hover {
+    background: var(--hover);
+}
+
+
+
+.dsTbl tfoot tr > * { border-bottom: none; }
+
+.dsTbl:not([scroll-y=true]) tr > *:last-child { border-right: none; }
+
+.dsTbl tr > *:first-child { border-left: none; }
+
+.dsTbl thead th { border-top: none; }
+
+.dsTbl:not([data-full-height]) tbody tr:last-child td {  border-bottom: none; }
+
+.dsTbl tbody tr:nth-child(odd) td{
+    background: var(--tbl-row-odd);
+}
+
+.dsTbl tbody tr:nth-child(even) td{
+    background: var(--tbl-row-even);
+}
+
+.dsTbl tbody tr:hover td{
+    background:   var(--hover-bckg);
+    color:        var(--hover-font);
+    
+    /*    border-top-color:    #ddd;*/
+    /*border-bottom-color: #bbb;*/
+}
+
+.dsTbl tbody tr:active td{
+    border-top: 1px solid yellow;
+    border-bottom: 1px solid yellow;
+}
+/*
+.dsTbl tr:hover td:first-child { border-left-color: #aaa; }
+.dsTbl tr:hover td:last-child { border-right-color: #aaa; }
+
+*/
+.dsTbl tfoot tr td > span > * {
+    margin: 0 4px;
+    display: inline-block;
+}
+
+.dsTbl tfoot tr td {
+    border-top: 1px solid var(--groove-dark);
+}
+
+.dsTbl tfoot tr td > span:nth-child(1) {
+    float: left;
+}
+
+.dsTbl tfoot tr td > span:nth-child(2) {
+    float: right;
+}
+
+.dstbl-number {
+    width: 50px;
+}
+
+.dsTbl td.fa{
+    text-align: center;
+}
+
+.dsTbl th {
+    position: relative;
+}
+
+/*.dsTbl th.sorting_asc::after {
+    content: "▲";
+    position: absolute;
+    width: 10px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 70%);
+    margin: auto;
+}
+
+.dsTbl th.sorting_desc::after {
+    content: "▼";
+    position: absolute;
+    width: 10px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    margin: auto
+}*/
+
+.dsTbl th.sorting_desc {
+    box-shadow: inset 0 -3px 3px -2px rgb(232, 121, 0)
+}
+
+
+.dsTbl th.sorting_asc {
+    box-shadow: inset 0 3px 3px -2px rgb(232, 121, 0)
+}
+
+
+.dsTbl td.sorting_desc, .dsTbl td.sorting_asc {
+    box-shadow:inset 0 0 0 99999px rgba(0, 0, 0, 0.04);
+}
+
+.dsTbl input[type=checkbox]{
+    margin: 0;
+}
+
+.fa.fa-grip:before {    
+    content: "\f142 \202F \f142"; 
+} 
+
+
+input[type='checkbox'].dsTbl {     
+    position: relative;
+    left: -999em;
+    display:none;
+}
+
+input[type='checkbox'].dsTbl + span{
+    font-family: FontAwesome;
+    display: inline-block;
+    min-width: 12px;
+
+}
+input[type='checkbox'].dsTbl + span:after { 
+    content: "\f096";    
+}
+
+input[type='checkbox'].dsTbl:checked + span:after {
+    content: "\f046";      
+    margin-right: -2px;
+}
