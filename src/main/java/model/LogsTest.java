@@ -1,19 +1,13 @@
 package model;
 
 import core.config.Database;
-import model.logs.Log;
 import model.logs.AppMode;
+import model.logs.Log;
 import model.logs.LogKind;
 import model.logs.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import java.beans.BeanInfo;
-import java.beans.beancontext.BeanContext;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -27,7 +21,7 @@ public class LogsTest {
     private Database db;
 
 
-    @PostConstruct
+    // @PostConstruct
     public void test() {
 
         Error ex1 = new Error("sadsaasd");

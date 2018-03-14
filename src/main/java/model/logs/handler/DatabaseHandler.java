@@ -12,13 +12,12 @@ import model.logs.entity.LogAttributeEntity;
 import model.logs.entity.LogEntity;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component
+//@Component
 public class DatabaseHandler extends LogHandler {
 
     private static int blockValuesCount = 3000;
@@ -37,7 +36,7 @@ public class DatabaseHandler extends LogHandler {
     }
 
     @Override
-    public void publish(Log log) {
+    protected void publish(Log log) {
 
         if (db == null) return;
 

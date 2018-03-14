@@ -19,7 +19,7 @@ public abstract class LogHandler {
         }
     }
 
-    public abstract void publish(Log log);
+    protected abstract void publish(Log log);
 
     public static void onBeforeDispatch(Consumer<Log> consumer) {
         synchronized (beforeDispatchConsumers) {
@@ -34,7 +34,11 @@ public abstract class LogHandler {
         }
         synchronized (handlers) {
             for (LogHandler handler : handlers)
-                handler.publish(log);
+                try {
+                    handler.publish(log);
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                }
         }
     }
 }

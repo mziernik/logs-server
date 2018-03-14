@@ -1,7 +1,6 @@
 package model.logs.handler;
 
 import model.logs.Log;
-import org.springframework.stereotype.Service;
 import utils.JsonBuilder;
 
 import java.net.DatagramPacket;
@@ -22,7 +21,7 @@ public class UdpHandler extends LogHandler {
     }
 
     @Override
-    public void publish(Log log) {
+    protected void publish(Log log) {
 
         if (socket == null)
             try {

@@ -21,7 +21,7 @@ public class WebConsoleHandler extends LogHandler {
     }
 
     @Override
-    public void publish(Log log) {
+    protected void publish(Log log) {
         synchronized (logs) {
             logs.add(log);
             while (logs.size() > 1000)

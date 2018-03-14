@@ -1,19 +1,15 @@
 package core;
 
 import core.config.AppConfig;
-import model.logs.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.WebApplicationInitializer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import java.util.Enumeration;
 
 @SpringBootApplication
@@ -56,6 +52,7 @@ public class Main extends SpringBootServletInitializer {
 
 
     public static void main(String[] args) throws Exception {
+        System.setProperty("visualvm.display.name", "Logs Server");
         Main.args = args;
 
         // inicjalizacja

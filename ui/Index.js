@@ -19,9 +19,6 @@ window.addEventListener("load", () => {
 
     var url = window.location.href.replace("http://", "ws://") + "console";
 
-    if (TEST_MODE)
-        url = "ws://localhost:8000/console";
-
     const ws = new WebSocket(url);
 
     ws.onclose = function (code, reason, wasClear) {

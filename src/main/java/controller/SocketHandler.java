@@ -4,7 +4,6 @@ import model.logs.Log;
 import model.logs.handler.WebConsoleHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -12,6 +11,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import utils.JsonBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -19,7 +19,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 
-    List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
+    private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Autowired
     private WebConsoleHandler handler;
@@ -32,7 +32,9 @@ public class SocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        sessions.add(session);
+        synchronized (sessions) {
+            sessions.add(session);
+        }
 
         LinkedList<Log> logs = handler.getLogs();
         JsonBuilder json = new JsonBuilder();
@@ -46,26 +48,30 @@ public class SocketHandler extends TextWebSocketHandler {
             });
         });
 
-
         session.sendMessage(new TextMessage(json.toString()));
-
     }
 
     @Override
-    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+    public void handleTransportError(WebSocketSession session, Throwable exception) {
         exception.getStackTrace();
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        sessions.remove(session);
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        synchronized (sessions) {
+            sessions.remove(session);
+        }
     }
 
     public void publish(Log log) {
 
         if (sessions.isEmpty()) return;
+        List<WebSocketSession> sessions;
+        synchronized (this.sessions) {
+            sessions = new ArrayList<>(this.sessions);
+        }
 
-        LinkedList<Log> logs = handler.getLogs();
+        // LinkedList<Log> logs = handler.getLogs();
         JsonBuilder json = new JsonBuilder();
         json.quotaNames = true;
         json.object(() -> {

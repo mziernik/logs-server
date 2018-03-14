@@ -122,6 +122,23 @@ Node.prototype.addText = Node.prototype.addText || function (str: string): Node 
  */
 // $FlowFixMe
 Node.prototype.setText = Node.prototype.setText || function (str: string): Node {
+    this.innerText = str;
+    return this;
+}
+;
+
+/**
+ * Usuń wszystkie gałęzie tekstowe z bieżącej i dodaj nową
+ * @param {string} str
+ * @return {Node}
+ */
+// $FlowFixMe
+Node.prototype.updateText = Node.prototype.setText || function (str
+:
+string
+):
+Node
+{
     this.forEach(function (node) {
         if (node.nodeName === "#text")
             node.parentNode.removeChild(node);
