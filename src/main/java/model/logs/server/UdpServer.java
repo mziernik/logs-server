@@ -27,7 +27,6 @@ public class UdpServer extends LogServer {
         byte[] data = new byte[65535];
 
         try {
-            System.out.println("sssssssssssss");
             serverSocket = new DatagramSocket(5140);
             while (true) {
                 DatagramPacket pck = new DatagramPacket(data, data.length);

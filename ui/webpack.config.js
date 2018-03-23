@@ -11,7 +11,7 @@ const DEV = NODE_ENV === 'development' || NODE_ENV === 'dev';
 const TEST = NODE_ENV === 'test';
 const PROD = NODE_ENV === 'production' || NODE_ENV === 'prod';
 
-const PACKAGE = require("./package.json");
+const PACKAGE = require("../package.json");
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "3000";
 
@@ -28,11 +28,11 @@ for (let name in env)
 
 
 module.exports = {
-    entry: ['./Index.js'],
+    entry: ['./ui/Index.js'],
     devtool: PROD ? false : 'source-map',
     output: {
         publicPath: '/',
-        path: path.join(__dirname, '../src/main/webapp'),
+        path: path.join(__dirname, './src/main/webapp'),
         filename: 'bundle.js'
     },
     resolve: {
@@ -40,7 +40,7 @@ module.exports = {
     },
     module: {loaders: []},
     devServer: {
-        contentBase: "./public",
+        contentBase: "./ui/public",
         // noInfo: true,        // do not print bundle build stats
         hot: true,        // enable HMR
         inline: true,         // embed the webpack-dev-server runtime into the bundle
@@ -77,7 +77,7 @@ module.exports.plugins = [
         "window.$": "jquery"
     }),
     new HtmlWebpackPlugin({
-        template: './view/index.html',
+        template: './ui/view/index.html',
         files: {
             title: 'gRep',
             //  filename: 'assets/admin.html',
@@ -91,7 +91,7 @@ if (!DEV) {
 
     module.exports.plugins.push(
         new WebpackAutoInject({
-            PACKAGE_JSON_PATH: './package.json',
+            PACKAGE_JSON_PATH: '../package.json',
             components: {
                 AutoIncreaseVersion: true,
                 InjectAsComment: false

@@ -1,6 +1,7 @@
 package core;
 
 import core.config.AppConfig;
+import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
@@ -55,11 +56,21 @@ public class Main extends SpringBootServletInitializer {
         System.setProperty("visualvm.display.name", "Logs Server");
         Main.args = args;
 
+        System.out.println("" +
+                "\n" +
+                "  _________                                   .____                                \n" +
+                " /   _____/ _____________  _  __ ___________  |    |    ____   ____   ______  _  __\n" +
+                " \\_____  \\_/ __ \\_  __ \\ \\/ \\/ // __ \\_  __ \\ |    |   /  _ \\ / ___\\ /  _ \\ \\/ \\/ /\n" +
+                " /        \\  ___/|  | \\/\\     /\\  ___/|  | \\/ |    |__(  <_> ) /_/  >  <_> )     / \n" +
+                "/_______  /\\___  >__|    \\/\\_/  \\___  >__|    |_______ \\____/\\___  / \\____/ \\/\\_/  \n" +
+                "        \\/     \\/                   \\/                \\/    /_____/                \n");
+
         // inicjalizacja
         getConfig();
 
         new SpringApplicationBuilder()
                 .sources(Main.class)
+                .bannerMode(Banner.Mode.OFF)
                 .properties(getConfig())
                 .run();
     }

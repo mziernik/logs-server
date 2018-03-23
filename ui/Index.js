@@ -12,12 +12,13 @@ window.addEventListener("load", () => {
     $('#main').enhsplitter({position: '20%'});
     $('#content').enhsplitter({vertical: false, position: '20%', minSize: 0});
 
-    debugger;
-
     window.logs = new Logs();
 
 
-    var url = window.location.href.replace("http://", "ws://") + "console";
+    var url = window.location.href.replace("http://", "ws://").replace("https://", "wss://") + "console";
+
+    if (url.startsWith("ws://127.0.0.1:3000"))
+        url = "ws://127.0.0.1:8000/console";
 
     const ws = new WebSocket(url);
 

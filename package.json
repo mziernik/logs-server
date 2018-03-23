@@ -7,7 +7,7 @@
     "license": "MIT",
     "main": "Index.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=dev webpack-dev-server --colors",
+        "start": "cross-env NODE_ENV=dev webpack-dev-server --config ui/webpack.config.js --colors",
         "lint": "eslint --ext js --ext jsx src || exit 0",
         "dev": " webpack-dashboard -- webpack-dev-server",
         "test": "export NODE_ENV=test && jest",
