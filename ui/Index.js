@@ -6,7 +6,11 @@ import "./core/component/enhsplitter/enhsplitter.js";
 import "./core/component/enhsplitter/enhsplitter.css";
 
 import Logs from "./view/console";
-import {TEST_MODE} from "./core/core";
+
+
+class WebApi {
+
+}
 
 window.addEventListener("load", () => {
     $('#main').enhsplitter({position: '20%'});
