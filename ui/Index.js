@@ -14,7 +14,7 @@ class WebApi {
 
 window.addEventListener("load", () => {
     $('#main').enhsplitter({position: '20%'});
-    $('#content').enhsplitter({vertical: false, position: '20%', minSize: 0});
+    //  $('#content').enhsplitter({vertical: false, position: '20%', minSize: 0});
 
     window.logs = new Logs();
 

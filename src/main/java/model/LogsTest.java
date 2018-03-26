@@ -8,6 +8,7 @@ import model.logs.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -21,7 +22,7 @@ public class LogsTest {
     private Database db;
 
 
-    // @PostConstruct
+    @PostConstruct
     public void test() {
 
         Error ex1 = new Error("sadsaasd");

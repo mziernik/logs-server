@@ -10,11 +10,9 @@ body {
     height: 100%;
     overflow: hidden;
     background-image: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -ms-user-select: none;
+
+    user-select: none;
+
     cursor: default;
 
     display: -webkit-flex;
@@ -178,12 +176,9 @@ body[exported] {
 
 /******************************* szczegóły **************************/
 
-.log-details {
-    -webkit-user-select: auto;
-    -khtml-user-select: auto;
-    -moz-user-select: auto;
-    -o-user-select: auto;
-    -ms-user-select: auto;
+.log-details > * {
+    user-select: text;
+
 }
 
 .log-details > td > div {
