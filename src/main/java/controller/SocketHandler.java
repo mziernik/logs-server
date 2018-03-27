@@ -1,5 +1,6 @@
 package controller;
 
+import core.webapi.AbstractWebApiConnector;
 import model.logs.Log;
 import model.logs.handler.WebConsoleHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import utils.JsonBuilder;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
+
+    private final WebApiContext context = new WebApiContext();
 
     private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
@@ -27,11 +31,16 @@ public class SocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message)
             throws InterruptedException, IOException {
-        System.out.println(message);
+
+        context.onMessage(session, new String(message.asBytes(), Charset.forName("UTF-8")));
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+
+        context.onConnect(session);
+
+
         synchronized (sessions) {
             sessions.add(session);
         }
@@ -53,11 +62,13 @@ public class SocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) {
+        context.onError(session, exception);
         exception.getStackTrace();
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        context.onClose(session, status);
         synchronized (sessions) {
             sessions.remove(session);
         }
@@ -84,5 +95,23 @@ public class SocketHandler extends TextWebSocketHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+}
+
+class WebApiContext extends AbstractWebApiConnector<WebSocketSession, WebApiEndpoint> {
+
+    public WebApiContext() {
+        super(new WebApiEndpoint());
+    }
+
+    @Override
+    public void close(WebSocketSession webSocketSession, CloseStatus status) throws IOException {
+        webSocketSession.close(status);
+
+    }
+
+    @Override
+    public void sendMessage(WebSocketSession webSocketSession, String message) throws IOException {
+        webSocketSession.sendMessage(new TextMessage(message));
     }
 }

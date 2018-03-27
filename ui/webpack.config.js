@@ -79,7 +79,7 @@ module.exports.plugins = [
     new HtmlWebpackPlugin({
         template: './view/index.html',
         files: {
-            title: 'gRep',
+            title: 'logs-server',
             //  filename: 'assets/admin.html',
             // css: ['style.css'],
             js: ["bundle.js"],
