@@ -96,22 +96,23 @@ public class SocketHandler extends TextWebSocketHandler {
                 e.printStackTrace();
             }
     }
+
+    class WebApiContext extends AbstractWebApiConnector<WebSocketSession, WebApiEndpoint> {
+
+        public WebApiContext() {
+            super(new WebApiEndpoint());
+        }
+
+        @Override
+        public void close(WebSocketSession webSocketSession, CloseStatus status) throws IOException {
+            webSocketSession.close(status);
+
+        }
+
+        @Override
+        public void sendMessage(WebSocketSession webSocketSession, String message) throws IOException {
+            webSocketSession.sendMessage(new TextMessage(message));
+        }
+    }
 }
 
-class WebApiContext extends AbstractWebApiConnector<WebSocketSession, WebApiEndpoint> {
-
-    public WebApiContext() {
-        super(new WebApiEndpoint());
-    }
-
-    @Override
-    public void close(WebSocketSession webSocketSession, CloseStatus status) throws IOException {
-        webSocketSession.close(status);
-
-    }
-
-    @Override
-    public void sendMessage(WebSocketSession webSocketSession, String message) throws IOException {
-        webSocketSession.sendMessage(new TextMessage(message));
-    }
-}

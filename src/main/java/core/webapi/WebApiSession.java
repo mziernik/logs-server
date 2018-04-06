@@ -67,7 +67,7 @@ public class WebApiSession {
 
                 Object result = method.invoke(connector.endpoint, params.toArray());
 
-                String jsonResult = new GsonBuilder().create().toJson(result).toString();
+                String jsonResult = new GsonBuilder().create().toJson(result);
 
                 return;
             }

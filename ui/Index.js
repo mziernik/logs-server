@@ -4,13 +4,13 @@ import "./core/utils/ErrorHandler";
 import "./core/core";
 import "./core/component/enhsplitter/enhsplitter.js";
 import "./core/component/enhsplitter/enhsplitter.css";
+import WebApi from "./core/webapi/WebApi";
 
 import Logs from "./view/console";
+import {WebSocketTransport} from "./core/webapi/Transport";
+import WebApiRequest from "./core/webapi/Request";
 
 
-class WebApi {
-
-}
 
 window.addEventListener("load", () => {
     $('#main').enhsplitter({position: '20%'});
@@ -24,6 +24,7 @@ window.addEventListener("load", () => {
     if (url.startsWith("ws://127.0.0.1:3000"))
         url = "ws://127.0.0.1:8000/console";
 
+    /*
     const ws = new WebSocket(url);
 
     ws.onclose = function (code, reason, wasClear) {
@@ -40,5 +41,19 @@ window.addEventListener("load", () => {
     ws.onopen = function (event) {
 
     };
+
+    */
+    const webapi:WebApi = new WebApi(url, WebSocketTransport);
+
+
+    new WebApiRequest(webapi, "test1", {
+        name: "aaaa",
+        value: 12,
+        bool: false
+    }, s => {
+        debugger;
+    }, e=> {
+        debugger;
+    })
 });
 

@@ -26,6 +26,7 @@ export default class WebApi {
         "Accept-Language": window.navigator.language
     };
 
+    url: string;
     hash: string;
     maxRetries: number = 10;
     processed: Map<string, WebApiRequest> = new Map();
@@ -36,6 +37,7 @@ export default class WebApi {
     constructor(url: string, transportClass) {
 
         WebApi.instance = this;
+        this.url = url;
 
         let retryCount = 0;
 
@@ -111,10 +113,6 @@ export default class WebApi {
             this.processed.clear();
         };
 
-    }
-
-    get url(): string {
-        return Config.api.wsUrl.value;
     }
 
     onMessage(data: WebApiMessage) {

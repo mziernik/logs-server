@@ -22,7 +22,6 @@ export default class WebApiRequest {
     webApi: WebApi;
     id: string = "" + ++lastId;
     location: string = window.location.href;
-    hash: string;
     method: string;
     params: Object;
     headers: Object = {};
@@ -34,7 +33,7 @@ export default class WebApiRequest {
     transportData: Object;
     sendTime: Date;
 
-    constructor(webApi: WebApi, method: string, hash: ?string, params: ?Object, onSuccess: ?OnSuccess, onError: ?OnError) {
+    constructor(webApi: WebApi, method: string, params: ?Object, onSuccess: ?OnSuccess, onError: ?OnError) {
         this.webApi = webApi;
         this.promise = new Promise((resolve, reject) => {
             this._resolve = resolve;
@@ -49,7 +48,6 @@ export default class WebApiRequest {
         // for (let i = 0; i < 4; i++)
         //     this.id += (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 
-        this.hash = hash;
         this.method = method;
         this.onSuccess = onSuccess;
         this.onError = onError;
