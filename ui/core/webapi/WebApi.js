@@ -20,11 +20,11 @@ export type OnError = (error: Object, response: WebApiResponse) => void;
 export default class WebApi {
 
     static instance: WebApi;
-    static headers: Object = {
-        "Local-TS": -1,
-        "User-Agent": window.navigator.userAgent,
-        "Accept-Language": window.navigator.language
-    };
+    // static headers: Object = {
+    //     "Local-TS": -1,
+    //     "User-Agent": window.navigator.userAgent,
+    //     "Accept-Language": window.navigator.language
+    // };
 
     url: string;
     hash: string;

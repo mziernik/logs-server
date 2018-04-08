@@ -20,7 +20,7 @@ export default class WebApiRequest {
     _processed: boolean = false;
 
     webApi: WebApi;
-    id: string = "" + ++lastId;
+    id: string = ++lastId;
     location: string = window.location.href;
     method: string;
     params: Object;
@@ -55,9 +55,9 @@ export default class WebApiRequest {
         //    req.spinner = data.spinner === undefined || data.spinner !== null ?         new Spinner() : null;
 
         // przepisywanie globalnych nagłówków
-        for (let name in WebApi.headers)
-            if (!this.headers[name])
-                this.headers[name] = WebApi.headers[name];
+        // for (let name in WebApi.headers)
+        //     if (!this.headers[name])
+        //         this.headers[name] = WebApi.headers[name];
 
 
         window.setTimeout(() => webApi.send(this));

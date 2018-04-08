@@ -18,7 +18,7 @@ export default class WebApiResponse {
     type: string; // typ danych (content type)
     isEvent: boolean;
     request: WebApiRequest;
-    hash: string;
+
     error: boolean = false;
     file: ?WebApiFile;
     processTime: number; // łączny czas przetwarzania żądania
@@ -60,24 +60,7 @@ export default class WebApiResponse {
 
         Dev.log(this, `${req.id},\t "${req.method}", czas: ${this.processTime}ms, serwer: ${data.duration}ms`, data);
 
-        //   console.log("RESPONSE " + req.method + "\n" + JSON.stringify(data, null, 4));
 
-        /*
-         if (req.spinner && req.spinner.hide)
-         req.spinner.hide();
-         */
-
-        if (typeof this.hash === "string") {
-            const split = this.hash.split("\/");
-            if (split.length === 2 && data.mode === "dev") {
-                if (webApi.hash !== split[0])
-                    Dev.warning("Wersja api uległa zmianie");
-
-                if (req.hash !== split[1])
-                    Dev.warning(`Wersja endpoint-u ${req.method} uległa zmianie`);
-            }
-
-        }
 
         if (req.onResponse)
             req.onResponse(data);
@@ -118,6 +101,7 @@ export default class WebApiResponse {
          }
          */
         if (this.error) {
+            if (err === null) err = this.data;
             req._reject(err, this);
 
             let handled = false;

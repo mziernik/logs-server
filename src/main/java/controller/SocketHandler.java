@@ -29,9 +29,7 @@ public class SocketHandler extends TextWebSocketHandler {
     private WebConsoleHandler handler;
 
     @Override
-    public void handleTextMessage(WebSocketSession session, TextMessage message)
-            throws InterruptedException, IOException {
-
+    public void handleTextMessage(WebSocketSession session, TextMessage message) {
         context.onMessage(session, new String(message.asBytes(), Charset.forName("UTF-8")));
     }
 
@@ -99,14 +97,13 @@ public class SocketHandler extends TextWebSocketHandler {
 
     class WebApiContext extends AbstractWebApiConnector<WebSocketSession, WebApiEndpoint> {
 
-        public WebApiContext() {
-            super(new WebApiEndpoint());
+        WebApiContext() {
+            super(WebApiEndpoint::new);
         }
 
         @Override
         public void close(WebSocketSession webSocketSession, CloseStatus status) throws IOException {
             webSocketSession.close(status);
-
         }
 
         @Override

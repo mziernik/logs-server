@@ -6,18 +6,22 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-public abstract class AbstractWebApiConnector<SESSION, ENDPOINT> {
+public abstract class AbstractWebApiConnector<SESSION, ENDPOINT extends AbstractWebApiEndpoint> {
 
-    final ENDPOINT endpoint;
+    final Function<WebApiSession<SESSION>, ENDPOINT> endpointSupplier;
     private final Map<SESSION, WebApiSession> sessions = new LinkedHashMap<>();
 
 
-    public AbstractWebApiConnector(ENDPOINT endpoint) {
-        this.endpoint = endpoint;
+    public AbstractWebApiConnector(Function<WebApiSession<SESSION>, ENDPOINT> endpoint) {
+        this.endpointSupplier = endpoint;
     }
 
     public void onConnect(SESSION session) {
+
+
         synchronized (sessions) {
             sessions.put(session, new WebApiSession(this, session));
         }
@@ -47,12 +51,12 @@ public abstract class AbstractWebApiConnector<SESSION, ENDPOINT> {
 
     public abstract void sendMessage(SESSION session, String message) throws IOException;
 
-    public void onMessage(WebSocketSession session, String message) {
+    public void onMessage(SESSION session, String message) {
         WebApiSession ses;
         synchronized (sessions) {
             ses = sessions.get(session);
         }
         if (ses == null) return;
-        ses.process(session, message);
+        ses.process( message);
     }
 }

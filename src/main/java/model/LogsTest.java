@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Locale;
 
-@Service
+//@Service
 public class LogsTest {
 
 
